@@ -1,0 +1,57 @@
+2020/03/15 20:30:27 [INFO] Terraform version: 0.12.23  
+2020/03/15 20:30:27 [INFO] Go runtime version: go1.13.8
+2020/03/15 20:30:27 [INFO] CLI args: []string{"/usr/local/bin/terraform", "init", "first_instance/"}
+2020/03/15 20:30:27 [DEBUG] Attempting to open CLI config file: /Users/dsayyed/.terraformrc
+2020/03/15 20:30:27 [DEBUG] File doesn't exist, but doesn't need to. Ignoring.
+2020/03/15 20:30:27 [INFO] CLI command args: []string{"init", "first_instance/"}
+2020/03/15 20:30:27 [TRACE] Meta.Backend: no config given or present on disk, so returning nil config
+2020/03/15 20:30:27 [TRACE] Meta.Backend: backend has not previously been initialized in this working directory
+2020/03/15 20:30:27 [DEBUG] New state was assigned lineage "e4d6a80c-3633-094d-2ef5-639a4054997d"
+2020/03/15 20:30:27 [TRACE] Meta.Backend: using default local state only (no backend configuration, and no existing initialized backend)
+2020/03/15 20:30:27 [TRACE] Meta.Backend: instantiated backend of type <nil>
+2020/03/15 20:30:27 [DEBUG] checking for provider in "."
+2020/03/15 20:30:27 [DEBUG] checking for provider in "/usr/local/bin"
+2020/03/15 20:30:27 [DEBUG] checking for provisioner in "."
+2020/03/15 20:30:27 [DEBUG] checking for provisioner in "/usr/local/bin"
+2020/03/15 20:30:27 [INFO] Failed to read plugin lock file .terraform/plugins/darwin_amd64/lock.json: open .terraform/plugins/darwin_amd64/lock.json: no such file or directory
+2020/03/15 20:30:27 [TRACE] Meta.Backend: backend <nil> does not support operations, so wrapping it in a local backend
+2020/03/15 20:30:27 [TRACE] backend/local: state manager for workspace "default" will:
+ - read initial snapshot from terraform.tfstate
+ - write new snapshots to terraform.tfstate
+ - create any backup at terraform.tfstate.backup
+2020/03/15 20:30:27 [TRACE] statemgr.Filesystem: reading initial snapshot from terraform.tfstate
+2020/03/15 20:30:27 [TRACE] statemgr.Filesystem: read snapshot with lineage "a8753cde-2763-ffe6-08d5-9ca5ef28ef96" serial 1
+2020/03/15 20:30:27 [DEBUG] checking for provider in "."
+2020/03/15 20:30:27 [DEBUG] checking for provider in "/usr/local/bin"
+2020/03/15 20:30:27 [DEBUG] plugin requirements: "google"=""
+2020/03/15 20:30:27 [DEBUG] Service discovery for registry.terraform.io at https://registry.terraform.io/.well-known/terraform.json
+2020/03/15 20:30:27 [TRACE] HTTP client GET request to https://registry.terraform.io/.well-known/terraform.json
+2020/03/15 20:30:27 [DEBUG] fetching provider versions from "https://registry.terraform.io/v1/providers/-/google/versions"
+2020/03/15 20:30:27 [TRACE] HTTP client GET request to https://registry.terraform.io/v1/providers/-/google/versions
+2020/03/15 20:30:38 [TRACE] HTTP client GET request to https://registry.terraform.io/v1/providers/-/google/versions
+panic: runtime error: invalid memory address or nil pointer dereference
+[signal SIGSEGV: segmentation violation code=0x1 addr=0x10 pc=0x1905347]
+
+goroutine 1 [running]:
+github.com/hashicorp/terraform/registry.maxRetryErrorHandler(0x0, 0x2ea8a80, 0xc00078c9f0, 0x2, 0x3, 0x3, 0x2ea8a80)
+	/private/tmp/terraform-20200306-88333-nvuhet/terraform-0.12.23/src/github.com/hashicorp/terraform/registry/client.go:422 +0xe7
+github.com/hashicorp/go-retryablehttp.(*Client).Do(0xc00023ce40, 0xc0006260f0, 0x2a53998, 0x13, 0xc0000f0348)
+	/private/tmp/terraform-20200306-88333-nvuhet/terraform-0.12.23/pkg/mod/github.com/hashicorp/go-retryablehttp@v0.5.2/client.go:452 +0x69a
+github.com/hashicorp/terraform/registry.(*Client).TerraformProviderVersions(0xc00023e220, 0xc000244190, 0x0, 0x0, 0x0)
+	/private/tmp/terraform-20200306-88333-nvuhet/terraform-0.12.23/src/github.com/hashicorp/terraform/registry/client.go:305 +0x46b
+github.com/hashicorp/terraform/plugin/discovery.(*ProviderInstaller).listProviderVersions(0xc0002a0770, 0xc0000c8ef6, 0x6, 0x2a3a06c, 0x1, 0x2a584ad, 0x15, 0x0, 0x102d051, 0x203000)
+	/private/tmp/terraform-20200306-88333-nvuhet/terraform-0.12.23/src/github.com/hashicorp/terraform/plugin/discovery/get.go:477 +0x7e
+github.com/hashicorp/terraform/plugin/discovery.(*ProviderInstaller).Get(0xc0002a0770, 0xc0000c8ef6, 0x6, 0x2a3a06c, 0x1, 0x2a584ad, 0x15, 0x3e6dba0, 0x0, 0x0, ...)
+	/private/tmp/terraform-20200306-88333-nvuhet/terraform-0.12.23/src/github.com/hashicorp/terraform/plugin/discovery/get.go:125 +0xde
+github.com/hashicorp/terraform/command.(*InitCommand).getProviders(0xc0004b1a40, 0xc0002a09a0, 0xc0000c28f8, 0x0, 0xc0001d4380, 0x0, 0x0, 0x0)
+	/private/tmp/terraform-20200306-88333-nvuhet/terraform-0.12.23/src/github.com/hashicorp/terraform/command/init.go:530 +0x4c3
+github.com/hashicorp/terraform/command.(*InitCommand).Run(0xc0004b1a40, 0xc0000a41a0, 0x1, 0x1, 0xc0000a36c0)
+	/private/tmp/terraform-20200306-88333-nvuhet/terraform-0.12.23/src/github.com/hashicorp/terraform/command/init.go:347 +0xfc4
+github.com/mitchellh/cli.(*CLI).Run(0xc0000f2640, 0xc0000f2640, 0xc00052bcc0, 0x1)
+	/private/tmp/terraform-20200306-88333-nvuhet/terraform-0.12.23/pkg/mod/github.com/mitchellh/cli@v1.0.0/cli.go:255 +0x1da
+main.wrappedMain(0x0)
+	/private/tmp/terraform-20200306-88333-nvuhet/terraform-0.12.23/src/github.com/hashicorp/terraform/main.go:239 +0xc43
+main.realMain(0x0)
+	/private/tmp/terraform-20200306-88333-nvuhet/terraform-0.12.23/src/github.com/hashicorp/terraform/main.go:103 +0xb4
+main.main()
+	/private/tmp/terraform-20200306-88333-nvuhet/terraform-0.12.23/src/github.com/hashicorp/terraform/main.go:39 +0x3a
