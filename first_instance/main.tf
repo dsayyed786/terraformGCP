@@ -1,12 +1,15 @@
+
+
 resource "google_compute_instance" "default" {
+  count = "${length(var.name_count)}"
   name         = "test"
-  machine_type = "n1-standard-1"
+  machine_type = "var.machine_type"
   zone         = "us-west1-b"
 
   boot_disk {
     initialize_params {
 
-      image = "ubuntu-os-cloud/ubuntu-1604-lts"
+      image = "var.image"
     }
   }
   network_interface {
